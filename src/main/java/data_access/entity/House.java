@@ -1,23 +1,23 @@
 package data_access.entity;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 public class House {
-
     private int id;
     private String address;
     private String name;
-    private Date startConstructionDate;
-    private Date endConstructionDate;
-    private Date commissioningDate;
+    private Date start_construction_date;
+    private Date end_construction_date;
+    private Date commissioning_date;
 
-    public House(int id, String address, String name, Date startConstructionDate, Date endConstructionDate, Date commissioningDate) {
+    public House(int id, String address, String name, Date start_construction_date, Date end_construction_date, Date commissioning_date) {
         this.id = id;
         this.address = address;
         this.name = name;
-        this.startConstructionDate = startConstructionDate;
-        this.endConstructionDate = endConstructionDate;
-        this.commissioningDate = commissioningDate;
+        this.start_construction_date = start_construction_date;
+        this.end_construction_date = end_construction_date;
+        this.commissioning_date = commissioning_date;
     }
 
     public int getId() {
@@ -44,27 +44,27 @@ public class House {
         this.name = name;
     }
 
-    public Date getStartConstructionDate() {
-        return startConstructionDate;
+    public Date getStart_construction_date() {
+        return start_construction_date;
     }
 
-    public void setStartConstructionDate(Date startConstructionDate) {
-        this.startConstructionDate = startConstructionDate;
+    public void setStart_construction_date(Date start_construction_date) {
+        this.start_construction_date = start_construction_date;
     }
 
-    public Date getEndConstructionDate() {
-        return endConstructionDate;
+    public Date getEnd_construction_date() {
+        return end_construction_date;
     }
 
-    public void setEndConstructionDate(Date endConstructionDate) {
-        this.endConstructionDate = endConstructionDate;
+    public void setEnd_construction_date(Date end_construction_date) {
+        this.end_construction_date = end_construction_date;
     }
 
-    public Date getCommissioningDate() {
-        return commissioningDate;
+    public Date getCommissioning_date() {
+        return commissioning_date;
     }
 
-    public void setCommissioningDate(Date commissioningDate) {
-        this.commissioningDate = commissioningDate;
+    public void setCommissioning_date(Date commissioning_date) {
+        this.commissioning_date = commissioning_date;
     }
 }

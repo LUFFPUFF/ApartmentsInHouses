@@ -11,9 +11,9 @@ import java.util.concurrent.BlockingQueue;
 
 public class JDBCConnection {
 
-    private static final String URL = "";
+    private static final String URL = "jdbc:mysql://localhost:3306/ApartmentsInHouses";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "nikita090504";
 
     private static final int POOL_SIZE = 10;
     private static BlockingQueue<Connection> pool;
@@ -34,6 +34,7 @@ public class JDBCConnection {
         } catch (SQLException e) {
             logger.error("SQL Exception during connection pool initialization");
         }
+        logger.close();
     }
 
     public static Connection getConnection() {
@@ -47,6 +48,7 @@ public class JDBCConnection {
         }
         return connection;
     }
+
     public static void releaseConnection(Connection connection) {
         if (connection != null) {
             try {
@@ -60,6 +62,7 @@ public class JDBCConnection {
                 logger.error("Error while checking if connection is closed");
             }
         }
+        logger.close();
     }
 
 
@@ -74,6 +77,7 @@ public class JDBCConnection {
             }
         }
         logger.info("Connection pool shut down");
+        logger.close();
     }
 
 }

@@ -7,7 +7,7 @@ public class Apartment {
     }
 
     private int id;
-    private House house_id;
+    private int house_id;
     private double totalArea;
     private double livingArea;
     private int rooms;
@@ -16,8 +16,9 @@ public class Apartment {
     private double price;
     private SaleCondition saleCondition;
 
-    public Apartment(int id, double totalArea, double livingArea, int rooms, int floor, int entrance, double price, SaleCondition saleCondition) {
+    public Apartment(int id, int houseId, double totalArea, double livingArea, int rooms, int floor, int entrance, double price, SaleCondition saleCondition) {
         this.id = id;
+        this.house_id = houseId;
         this.totalArea = totalArea;
         this.livingArea = livingArea;
         this.rooms = rooms;
@@ -36,10 +37,11 @@ public class Apartment {
     }
 
     public int getHouse_id() {
-        return house_id.getId();
+
+        return house_id;
     }
 
-    public void setHouse_id(House house_id) {
+    public void setHouse_id(int house_id) {
         this.house_id = house_id;
     }
 

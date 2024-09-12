@@ -18,7 +18,7 @@ public class ApartmentDAO implements DAO<Apartment> {
     public void insert(Apartment apartment) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String insertSQL = "INSERT INTO houses (id, totalArea, livingArea, rooms, floor, entrance, price, saleCondition) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String insertSQL = "INSERT INTO apartments (id, totalArea, livingArea, rooms, floor, entrance, price, saleCondition) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             connection = JDBCConnection.getConnection();
@@ -51,6 +51,8 @@ public class ApartmentDAO implements DAO<Apartment> {
                 logger.error("Error while closing resources: ");
             }
         }
+
+        logger.close();
     }
 
     @Override
