@@ -15,18 +15,18 @@ public class HouseDAO implements DAO<House> {
     public void insert(House house) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String insertSQL = "INSERT INTO houses (id, address, name, start_construction_date, end_construction_date, commissioning_date) VALUES (?, ?, ?, ?, ?, ?)";
+        String INSERT_SQL = "INSERT INTO houses (id, address, name, start_construction_date, end_construction_date, commissioning_date) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
             connection = JDBCConnection.getConnection();
             connection.setAutoCommit(false);
-            preparedStatement = connection.prepareStatement(insertSQL);
+            preparedStatement = connection.prepareStatement(INSERT_SQL);
             preparedStatement.setInt(1, house.getId());
             preparedStatement.setString(2, house.getAddress());
             preparedStatement.setString(3, house.getName());
-            preparedStatement.setDate(4, house.getStart_construction_date() != null ? new java.sql.Date(house.getStart_construction_date().getTime()) : null);
-            preparedStatement.setDate(5, house.getEnd_construction_date() != null ? new java.sql.Date(house.getEnd_construction_date().getTime()) : null);
-            preparedStatement.setDate(6, house.getCommissioning_date() != null ? new java.sql.Date(house.getCommissioning_date().getTime()) : null);
+            preparedStatement.setDate(4, house.getStart_construction_date());
+            preparedStatement.setDate(5, house.getEnd_construction_date());
+            preparedStatement.setDate(6, house.getCommissioning_date());
             int rowsAffected = preparedStatement.executeUpdate();
 
             if (rowsAffected > 0) {
@@ -37,19 +37,15 @@ public class HouseDAO implements DAO<House> {
             connection.commit();
 
         } catch (SQLException e) {
-            if (connection != null) {
-                try {
-                    logger.error("Transaction is being rolled back due to an error");
-                    connection.rollback();
-                } catch (SQLException rollbackEx) {
-                    logger.error("Error during transaction rollback: " + rollbackEx.getMessage());
-                }
+            try {
+                logger.error("Transaction is being rolled back due to an error");
+                connection.rollback();
+            } catch (SQLException rollbackEx) {
+                logger.error("Error during transaction rollback: " + rollbackEx.getMessage());
             }
             logger.error("Error while inserting house: " + e.getMessage());
-            e.printStackTrace();
 
         } finally {
-            // Закрываем ресурсы
             try {
                 if (preparedStatement != null) {
                     preparedStatement.close();
@@ -65,26 +61,92 @@ public class HouseDAO implements DAO<House> {
 
     @Override
     public void update(House house) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String updateSQL = "UPDATE houses SET address = ?, name = ?, start_construction_date = ?, end_construction_date = ?, commissioning_date = ? WHERE id = ?";
 
+        try {
+            connection = JDBCConnection.getConnection();
+            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement(updateSQL);
+            preparedStatement.setString(1, house.getAddress());
+            preparedStatement.setString(2, house.getName());
+            preparedStatement.setDate(3, house.getStart_construction_date());
+            preparedStatement.setDate(4, house.getEnd_construction_date());
+            preparedStatement.setDate(5, house.getCommissioning_date());
+            preparedStatement.setInt(6, house.getId());
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                logger.info("Successfully updated house with id: " + house.getId());
+            } else {
+                logger.warning("No rows affected, house with id: " + house.getId() + " was not updated.");
+            }
+            connection.commit();
+
+        } catch (SQLException e) {
+            try {
+                logger.error("Transaction is being rolled back due to an error");
+                connection.rollback();
+            } catch (SQLException rollbackEx) {
+                logger.error("Error during transaction rollback: " + rollbackEx.getMessage());
+            }
+            logger.error("Error while updating house: " + e.getMessage());
+
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    JDBCConnection.releaseConnection(connection);
+                }
+            } catch (SQLException e) {
+                logger.error("Error while closing resources: " + e.getMessage());
+            }
+        }
     }
 
     @Override
     public void delete(House house) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String DELETE_SQL = "Delete * From Houses where id = ?";
 
-    }
-
-    public void testSQL() {
         try {
-            Connection connection = JDBCConnection.getConnection();
-            Statement statement = connection.createStatement();
+            connection = JDBCConnection.getConnection();
+            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement(DELETE_SQL);
+            preparedStatement.setInt(1, house.getId());
 
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Houses");
+            int rowsAffected = preparedStatement.executeUpdate();
 
-            while (resultSet.next()) {
-                System.out.println(resultSet.getString("name"));
+            if (rowsAffected > 0) {
+                logger.info("Successfully deleted house with id: " + house.getId());
+            } else {
+                logger.warning("No rows affected, house with id: " + house.getId() + " was not deleted.");
             }
+            connection.commit();
         } catch (SQLException e) {
-            e.printStackTrace();
+            try {
+                logger.error("Transaction is being rolled back due to an error");
+                connection.rollback();
+            } catch (SQLException rollbackEx) {
+                logger.error("Error during transaction rollback: " + rollbackEx.getMessage());
+            }
+            logger.error("Error while deleting house: " + e.getMessage());
+
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    JDBCConnection.releaseConnection(connection);
+                }
+            } catch (SQLException e) {
+                logger.error("Error while closing resources: " + e.getMessage());
+            }
         }
     }
 

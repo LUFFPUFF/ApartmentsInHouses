@@ -9,10 +9,10 @@ public class Client {
     private String name;
     private int phoneNumber;
     private String email;
-    private int passportNumber;
+    private String passportNumber;
     private Date dateOfBirth;
 
-    public Client(int id, Apartment apartment_id, String name, int phoneNumber, String email, int passportNumber, Date dateOfBirth) {
+    public Client(int id, Apartment apartment_id, String name, int phoneNumber, String email, String passportNumber, Date dateOfBirth) {
         this.id = id;
         this.apartment_id = apartment_id;
         this.name = name;
@@ -62,11 +62,11 @@ public class Client {
         this.email = email;
     }
 
-    public int getPassportNumber() {
+    public String getPassportNumber() {
         return passportNumber;
     }
 
-    public void setPassportNumber(int passportNumber) {
+    public void setPassportNumber(String passportNumber) {
         this.passportNumber = passportNumber;
     }
 

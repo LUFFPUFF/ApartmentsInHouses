@@ -14,7 +14,10 @@ public class Test {
         HouseDAO houseDAO = new HouseDAO();
 
 
-        House house = new House(2, "ggg", "Lazurnya", new java.sql.Date(2024, 11, 12), new java.sql.Date(2022, 11, 12), new java.sql.Date(2024, 11, 12));
+        House house = new House(4, "Зои Космодемьянской д 7", "Дом", new java.sql.Date(1980, 11, 12), new java.sql.Date(2010, 11, 12), new java.sql.Date(2015, 11, 12));
+
+
+
         Apartment apartment = new Apartment(1, house.getId(), 45.5, 33.3, 1, 4, 2, 3.7, Apartment.SaleCondition.FREE);
 
 
