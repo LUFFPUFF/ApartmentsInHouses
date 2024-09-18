@@ -1,6 +1,8 @@
 package data_access.entity;
 
-public class FloorPlan {
+import java.io.Serializable;
+
+public class FloorPlan implements Serializable {
 
     private int id;
     private House houseId;

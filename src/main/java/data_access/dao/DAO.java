@@ -2,8 +2,8 @@ package data_access.dao;
 
 import java.util.List;
 
-public interface DAO<T> {
-    void insert(T t);
-    void update(T t);
-    void delete(T t);
+public interface DAO<E, K> {
+    void insert(E entity);
+    void update(E entity);
+    void delete(K id);
 }

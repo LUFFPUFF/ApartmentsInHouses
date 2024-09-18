@@ -1,8 +1,9 @@
 package data_access.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Reservation {
+public class Reservation implements Serializable {
 
     private int id;
     private Apartment apartmentId;

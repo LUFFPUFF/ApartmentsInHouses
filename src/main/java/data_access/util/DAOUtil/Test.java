@@ -2,25 +2,26 @@ package data_access.util.DAOUtil;
 
 import data_access.entity.Apartment;
 import data_access.entity.House;
-import data_access.util.JDBCUtil.JDBCConnection;
+import util.DI.annotation.Autowired;
+import util.DI.injector.Injector;
 
-import java.sql.Connection;
-import java.util.Date;
+import java.sql.Date;
+import java.util.Objects;
 
 public class Test {
+    public static void main(String[] args) {
+        // Запуск инжектора с основным классом приложения
+        Injector.startApplication(Test.class);
 
-    public static void main(String[] args) throws InstantiationException, IllegalAccessException {
-        ApartmentDAO apartmentDAO = new ApartmentDAO();
-        HouseDAO houseDAO = new HouseDAO();
+        // Получение экземпляра класса House из контейнера
+        House house = Injector.getService(House.class);
 
-
-        House house = new House(4, "Зои Космодемьянской д 7", "Дом", new java.sql.Date(1980, 11, 12), new java.sql.Date(2010, 11, 12), new java.sql.Date(2015, 11, 12));
-
-
-
-        Apartment apartment = new Apartment(1, house.getId(), 45.5, 33.3, 1, 4, 2, 3.7, Apartment.SaleCondition.FREE);
-
-
-        houseDAO.insert(house);
+        // Проверка значений, чтобы убедиться, что объект был создан
+        System.out.println("House ID: " + house.getId());
+        System.out.println("House Address: " + house.getAddress());
+        System.out.println("House Name: " + house.getName());
+        System.out.println("Construction Start Date: " + house.getStart_construction_date());
+        System.out.println("Construction End Date: " + house.getEnd_construction_date());
+        System.out.println("Commissioning Date: " + house.getCommissioning_date());
     }
 }

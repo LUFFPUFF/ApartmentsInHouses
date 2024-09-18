@@ -1,23 +1,44 @@
 package data_access.entity;
 
 
+import BL.createHouse.HouseDataProvider;
+import util.DI.annotation.Autowired;
+import util.DI.annotation.Component;
+import util.DI.annotation.Qualifier;
+
+import java.io.Serializable;
 import java.sql.Date;
 
-public class House {
+@Component
+public class House implements Serializable {
+
     private int id;
     private String address;
+
     private String name;
+
     private Date start_construction_date;
+
     private Date end_construction_date;
+
     private Date commissioning_date;
 
-    public House(int id, String address, String name, Date start_construction_date, Date end_construction_date, Date commissioning_date) {
-        this.id = id;
-        this.address = address;
-        this.name = name;
-        this.start_construction_date = start_construction_date;
-        this.end_construction_date = end_construction_date;
-        this.commissioning_date = commissioning_date;
+    @Autowired
+    HouseDataProvider houseDataProvider;
+
+
+    public House() {
+    }
+
+    @Autowired
+    public House(HouseDataProvider provider) {
+
+        this.id = provider.getId();
+        this.address = provider.getAddress();
+        this.name = provider.getName();
+        this.start_construction_date = provider.getStartConstructionDate();
+        this.end_construction_date = provider.getEndConstructionDate();
+        this.commissioning_date = provider.getCommissioningDate();
     }
 
     public int getId() {

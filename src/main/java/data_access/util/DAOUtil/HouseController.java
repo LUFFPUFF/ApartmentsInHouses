@@ -3,12 +3,14 @@ package data_access.util.DAOUtil;
 import data_access.dao.DAO;
 import data_access.entity.House;
 import data_access.util.JDBCUtil.JDBCConnection;
+import util.DI.annotation.Component;
 import util.logger.CustomLogger;
 import util.logger.LogLevel;
 
 import java.sql.*;
 
-public class HouseDAO implements DAO<House> {
+@Component
+public class HouseController implements DAO<House, Integer> {
     private static final CustomLogger logger = new CustomLogger("log/house.log", LogLevel.INFO);
 
     @Override
@@ -34,6 +36,7 @@ public class HouseDAO implements DAO<House> {
             } else {
                 logger.warning("No rows affected, house with id: " + house.getId() + " was not added.");
             }
+
             connection.commit();
 
         } catch (SQLException e) {
@@ -75,6 +78,7 @@ public class HouseDAO implements DAO<House> {
             preparedStatement.setDate(4, house.getEnd_construction_date());
             preparedStatement.setDate(5, house.getCommissioning_date());
             preparedStatement.setInt(6, house.getId());
+
             int rowsAffected = preparedStatement.executeUpdate();
 
             if (rowsAffected > 0) {
@@ -108,23 +112,22 @@ public class HouseDAO implements DAO<House> {
     }
 
     @Override
-    public void delete(House house) {
+    public void delete(Integer id) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String DELETE_SQL = "Delete * From Houses where id = ?";
+        String DELETE_SQL = "delete * from houses where id = ?";
 
         try {
             connection = JDBCConnection.getConnection();
             connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(DELETE_SQL);
-            preparedStatement.setInt(1, house.getId());
 
             int rowsAffected = preparedStatement.executeUpdate();
 
             if (rowsAffected > 0) {
-                logger.info("Successfully deleted house with id: " + house.getId());
+                logger.info("Successfully deleted house with id: " + id);
             } else {
-                logger.warning("No rows affected, house with id: " + house.getId() + " was not deleted.");
+                logger.warning("No rows affected, house with id: " + id + " was not deleted.");
             }
             connection.commit();
         } catch (SQLException e) {

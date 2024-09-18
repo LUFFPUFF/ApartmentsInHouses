@@ -1,6 +1,12 @@
 package data_access.entity;
 
-public class Apartment {
+import util.DI.annotation.Autowired;
+import util.DI.annotation.Component;
+
+import java.io.Serializable;
+
+@Component
+public class Apartment implements Serializable {
 
     public enum SaleCondition {
         FREE, RESERVED, SOLD
