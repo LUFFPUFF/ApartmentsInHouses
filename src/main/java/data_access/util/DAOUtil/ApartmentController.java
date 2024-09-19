@@ -9,10 +9,21 @@ import util.logger.LogLevel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public class ApartmentController implements DAO<Apartment, Integer> {
 
     private static final CustomLogger logger = new CustomLogger("log/apart.log", LogLevel.INFO);
+
+    @Override
+    public List<Apartment> getAll() {
+        return null;
+    }
+
+    @Override
+    public Apartment getEntityById(Integer id) {
+        return null;
+    }
 
     @Override
     public void insert(Apartment apartment) {

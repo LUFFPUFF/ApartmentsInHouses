@@ -4,14 +4,108 @@ import data_access.dao.DAO;
 import data_access.entity.House;
 import data_access.util.JDBCUtil.JDBCConnection;
 import util.DI.annotation.Component;
+import util.DI.injector.Injector;
 import util.logger.CustomLogger;
 import util.logger.LogLevel;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class HouseController implements DAO<House, Integer> {
     private static final CustomLogger logger = new CustomLogger("log/house.log", LogLevel.INFO);
+
+
+    /**
+     * Через DI не получается получить разные объекты
+     * @return
+     */
+    @Override
+    public List<House> getAll() {
+        Connection connection= null;
+        PreparedStatement preparedStatement = null;
+        List<House> houses = new ArrayList<>();
+        String SQL = "select * from houses";
+
+        try {
+            connection = JDBCConnection.getConnection();
+            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement(SQL);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String address = resultSet.getString("address");
+                String name = resultSet.getString("name");
+                Date startConstructionDate = resultSet.getDate("start_construction_date");
+                Date endConstructionDate = resultSet.getDate("end_construction_date");
+                Date commissioningDate = resultSet.getDate("commissioning_date");
+
+                House house = new House(id, address, name, startConstructionDate, endConstructionDate, commissioningDate);
+
+                houses.add(house);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    JDBCConnection.releaseConnection(connection);
+                }
+            } catch (SQLException e) {
+                logger.error("Error while closing resources: " + e.getMessage());
+            }
+        }
+        return houses;
+    }
+
+    @Override
+    public House getEntityById(Integer id) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        House house = null;
+        String SQL = "select * from houses where id = ?";
+
+        try {
+            connection = JDBCConnection.getConnection();
+            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String address = resultSet.getString("address");
+                String name = resultSet.getString("name");
+                Date startConstructionDate = resultSet.getDate("start_construction_date");
+                Date endConstructionDate = resultSet.getDate("end_construction_date");
+                Date commissioningDate = resultSet.getDate("commissioning_date");
+
+                house = new House(id, address, name, startConstructionDate, endConstructionDate, commissioningDate);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    JDBCConnection.releaseConnection(connection);
+                }
+            } catch (SQLException e) {
+                logger.error("Error while closing resources: " + e.getMessage());
+            }
+        }
+        return house;
+    }
 
     @Override
     public void insert(House house) {

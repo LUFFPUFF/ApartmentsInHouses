@@ -5,7 +5,6 @@ import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.burningwave.core.assembler.ComponentContainer;
 import org.burningwave.core.classes.ClassCriteria;
