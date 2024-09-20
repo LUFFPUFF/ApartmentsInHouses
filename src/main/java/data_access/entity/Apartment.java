@@ -22,7 +22,9 @@ public class Apartment implements Serializable {
     private double price;
     private SaleCondition saleCondition;
 
-    public Apartment(int id, int houseId, double totalArea, double livingArea, int rooms, int floor, int entrance, double price, SaleCondition saleCondition) {
+
+    @Autowired
+    public Apartment(int id, int houseId, double totalArea, double livingArea, int rooms, int floor, int entrance, double price, String saleCondition) {
         this.id = id;
         this.house_id = houseId;
         this.totalArea = totalArea;
@@ -31,7 +33,11 @@ public class Apartment implements Serializable {
         this.floor = floor;
         this.entrance = entrance;
         this.price = price;
-        this.saleCondition = saleCondition;
+        this.saleCondition = SaleCondition.valueOf(saleCondition);
+    }
+
+    public Apartment() {
+
     }
 
     public int getId() {
@@ -105,5 +111,20 @@ public class Apartment implements Serializable {
 
     public void setSaleCondition(SaleCondition saleCondition) {
         this.saleCondition = saleCondition;
+    }
+
+    @Override
+    public String toString() {
+        return "Apartment{" +
+                "id=" + id +
+                ", house_id=" + house_id +
+                ", totalArea=" + totalArea +
+                ", livingArea=" + livingArea +
+                ", rooms=" + rooms +
+                ", floor=" + floor +
+                ", entrance=" + entrance +
+                ", price=" + price +
+                ", saleCondition=" + saleCondition +
+                '}';
     }
 }

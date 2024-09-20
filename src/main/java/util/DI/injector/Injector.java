@@ -1,17 +1,13 @@
 package util.DI.injector;
 
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.burningwave.core.assembler.ComponentContainer;
-import org.burningwave.core.classes.ClassCriteria;
-import org.burningwave.core.classes.ClassHunter;
-import org.burningwave.core.classes.SearchConfig;
+import org.reflections.Reflections;
 import util.DI.annotation.Component;
 import util.DI.injector.util.InjectionUtil;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class Injector {
     private final Map<Class<?>, Object> applicationScope;
@@ -45,7 +41,7 @@ public class Injector {
 
     private void initFramework(Class<?> mainClass)
             throws InstantiationException, IllegalAccessException, IOException, ClassNotFoundException {
-        Collection<Class<?>> componentClasses = findAllComponents(mainClass.getPackage().getName());
+        Set<Class<?>> componentClasses = findAllComponents(mainClass.getPackage().getName());
 
         for (Class<?> componentClass : componentClasses) {
             Object classInstance = componentClass.newInstance();
@@ -55,16 +51,9 @@ public class Injector {
         }
     }
 
-    private Collection<Class<?>> findAllComponents(String packageName) throws IOException {
-        ComponentContainer componentContainer = ComponentContainer.getInstance();
-        ClassHunter classHunter = componentContainer.getClassHunter();
-        String packageRelPath = packageName.replace(".", "/");
-        try (ClassHunter.SearchResult result = classHunter.findBy(
-                SearchConfig.forResources(packageRelPath)
-                        .by(ClassCriteria.create().allThoseThatMatch(cls -> cls.isAnnotationPresent(Component.class)))
-        )) {
-            return result.getClasses();
-        }
+    private Set<Class<?>> findAllComponents(String packageName) {
+        Reflections reflections = new Reflections(packageName);
+        return reflections.getTypesAnnotatedWith(Component.class);
     }
 
     @SuppressWarnings("unchecked")

@@ -1,14 +1,13 @@
 package util.DI.injector.util;
 
-import static org.burningwave.core.assembler.StaticComponentContainer.Fields;
-
-import java.lang.reflect.Field;
-import java.util.Collection;
-
-import org.burningwave.core.classes.FieldCriteria;
 import util.DI.annotation.Autowired;
 import util.DI.annotation.Qualifier;
 import util.DI.injector.Injector;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class InjectionUtil {
 
@@ -21,20 +20,25 @@ public class InjectionUtil {
      */
     public static void autowire(Injector injector, Class<?> classz, Object classInstance)
             throws InstantiationException, IllegalAccessException {
-        Collection<Field> fields = Fields.findAllAndMakeThemAccessible(
-                FieldCriteria.forEntireClassHierarchy().allThoseThatMatch(field ->
-                        field.isAnnotationPresent(Autowired.class)
-                ),
-                classz
-        );
+        List<Field> fields = findAllFields(classz);
+
         for (Field field : fields) {
-            String qualifier = field.isAnnotationPresent(Qualifier.class)
-                    ? field.getAnnotation(Qualifier.class).value()
-                    : null;
-            Object fieldInstance = injector.getBeanInstance(field.getType());
-            Fields.setDirect(classInstance, field, fieldInstance);
-            autowire(injector, fieldInstance.getClass(), fieldInstance);
+            if (field.isAnnotationPresent(Autowired.class)) {
+                field.setAccessible(true);
+                String qualifier = field.isAnnotationPresent(Qualifier.class)
+                        ? field.getAnnotation(Qualifier.class).value()
+                        : null;
+
+                Object fieldInstance = injector.getBeanInstance(field.getType());
+                field.set(classInstance, fieldInstance);  // Инъекция значения в поле
+                autowire(injector, fieldInstance.getClass(), fieldInstance);  // Рекурсивная инъекция
+            }
         }
     }
 
+    // Метод для получения всех полей класса и его суперклассов
+    private static List<Field> findAllFields(Class<?> classz) {
+        return Arrays.stream(classz.getDeclaredFields())
+                .collect(Collectors.toList());
+    }
 }

@@ -2,27 +2,111 @@ package data_access.util.DAOUtil;
 
 import data_access.dao.DAO;
 import data_access.entity.Apartment;
+import data_access.entity.House;
 import data_access.util.JDBCUtil.JDBCConnection;
+import util.DI.annotation.Component;
 import util.logger.CustomLogger;
 import util.logger.LogLevel;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ApartmentController implements DAO<Apartment, Integer> {
 
     private static final CustomLogger logger = new CustomLogger("log/apart.log", LogLevel.INFO);
 
     @Override
     public List<Apartment> getAll() {
-        return null;
+        Connection connection= null;
+        PreparedStatement preparedStatement = null;
+        List<Apartment> apartments = new ArrayList<>();
+        String SQL = "select * from apartments";
+
+        try {
+            connection = JDBCConnection.getConnection();
+            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement(SQL);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("id");
+                Integer houseId = resultSet.getInt("house_id");
+                Double totalArea = resultSet.getDouble("total_area");
+                Double livingArea = resultSet.getDouble("living_area");
+                Integer rooms = resultSet.getInt("rooms");
+                Integer floor = resultSet.getInt("floor");
+                Integer entrance = resultSet.getInt("entrance");
+                Double price = resultSet.getDouble("price");
+                String saleCondition = resultSet.getString("sale_condition");
+
+                Apartment apartment = new Apartment(id, houseId, totalArea, livingArea, rooms, floor, entrance, price, saleCondition);
+
+                apartments.add(apartment);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    JDBCConnection.releaseConnection(connection);
+                }
+            } catch (SQLException e) {
+                logger.error("Error while closing resources: " + e.getMessage());
+            }
+        }
+        return apartments;
     }
 
     @Override
     public Apartment getEntityById(Integer id) {
-        return null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        Apartment apartment = null;
+        String SQL = "select * from apartments where id = ?";
+
+        try {
+            connection = JDBCConnection.getConnection();
+            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Integer houseId = resultSet.getInt("house_id");
+                Double totalArea = resultSet.getDouble("total_area");
+                Double livingArea = resultSet.getDouble("living_area");
+                Integer rooms = resultSet.getInt("rooms");
+                Integer floor = resultSet.getInt("floor");
+                Integer entrance = resultSet.getInt("entrance");
+                Double price = resultSet.getDouble("price");
+                String saleCondition = resultSet.getString("sale_condition");
+
+                apartment = new Apartment(id, houseId, totalArea, livingArea, rooms, floor, entrance, price, saleCondition);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    JDBCConnection.releaseConnection(connection);
+                }
+            } catch (SQLException e) {
+                logger.error("Error while closing resources: " + e.getMessage());
+            }
+        }
+        return apartment;
     }
 
     @Override
