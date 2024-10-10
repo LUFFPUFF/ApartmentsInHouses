@@ -1,22 +1,20 @@
 package apartment.in.houses.data_access.apartmentsdatabase.entities;
 
-
-import apartment.in.houses.data_access.util.exucutor.annotation.Id;
 import apartment.in.houses.util.DI.annotation.Component;
-import apartment.in.houses.data_access.util.exucutor.annotation.Column;
-import apartment.in.houses.data_access.util.exucutor.annotation.Table;
-import apartment.in.houses.util.orm.annotation.OneToMany;
+import apartment.in.houses.util.orm.annotation.*;
 
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
 @Component
+@Entity
 @Table(name = "Houses")
 public class House implements Serializable {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GeneratedValue.GenerationType.IDENTITY)
     private int id;
     @Column(name = "address")
     private String address;

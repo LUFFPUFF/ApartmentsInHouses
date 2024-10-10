@@ -16,7 +16,6 @@ public class ApartmentService implements Service<Apartment, Integer> {
     @Autowired
     private ApartmentRepository repository;
 
-
     @Override
     public List<Apartment> getAll() {
         return repository.getAllApartments();
@@ -61,10 +60,7 @@ public class ApartmentService implements Service<Apartment, Integer> {
     }
 
     @Override
-    public void delete(Integer key) throws InvalidException {
-        if (key < 0) {
-            throw new InvalidException("Id house must be positive");
-        }
-        repository.delete(key);
+    public void delete(Apartment apartment) throws InvalidException {
+        repository.delete(apartment);
     }
 }

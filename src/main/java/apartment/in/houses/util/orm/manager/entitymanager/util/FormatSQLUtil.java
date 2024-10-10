@@ -5,7 +5,6 @@ import java.util.List;
 
 public class FormatSQLUtil {
 
-
     public static String insert(String tableName, List<String> columnNames) {
         return String.format(
                 "INSERT INTO %s (%s) VALUES (%s)",
@@ -17,7 +16,7 @@ public class FormatSQLUtil {
 
     public static String delete(String tableName, String primaryKeyName) {
         return String.format(
-                "DELETE FROM %s WHERE %s = ",
+                "DELETE FROM %s WHERE %s = ?",
                 tableName,
                 primaryKeyName);
     }
@@ -27,6 +26,27 @@ public class FormatSQLUtil {
                 "SELECT * FROM %s WHERE %s = ?",
                 tableName,
                 primaryKeyName);
+    }
+
+    public static String getOneToManyQuery(String tableName, String foreignKeyColumn) {
+        return "SELECT * FROM " + tableName + " WHERE " + foreignKeyColumn + " = ?";
+    }
+
+    public static String joinClausOneToMany(String targetTable, Class<?> entityClass, String foreignKeyColumn) {
+        return String.format(" LEFT JOIN %s ON %s.id = %s.%s",
+                targetTable,
+                TableUtil.getTableName(entityClass),
+                targetTable,
+                foreignKeyColumn);
+    }
+
+    public static String joinClausManyToOne(String targetTable, Class<?> entityClass, String foreignKeyColumn, String targetPrimaryKey) {
+        return String.format(" LEFT JOIN %s ON %s.%s = %s.%s",
+                targetTable,
+                TableUtil.getTableName(entityClass),
+                foreignKeyColumn,
+                targetTable,
+                targetPrimaryKey);
     }
 
 }

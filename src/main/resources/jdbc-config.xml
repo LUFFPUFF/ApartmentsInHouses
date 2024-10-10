@@ -6,4 +6,9 @@
     <username>root</username>
     <poolsize>10</poolsize>
     <initialPoolSize>5</initialPoolSize>
+
+    <mapping>
+        <entity class="apartment.in.houses.data_access.apartmentsdatabase.entities.Apartment" table = "Apartments"/>
+        <entity class="apartment.in.houses.data_access.apartmentsdatabase.entities.House" table = "Houses"/>
+    </mapping>
 </settings>

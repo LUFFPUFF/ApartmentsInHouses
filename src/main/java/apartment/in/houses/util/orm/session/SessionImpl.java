@@ -1,7 +1,7 @@
 package apartment.in.houses.util.orm.session;
 
-import apartment.in.houses.util.orm.manager.entitymanager.EntityManager;
-import apartment.in.houses.util.orm.manager.entitymanager.EntityManagerImpl;
+import apartment.in.houses.util.orm.manager.entitymanager.entitymanager.EntityManager;
+import apartment.in.houses.util.orm.manager.entitymanager.entitymanager.EntityManagerImpl;
 import apartment.in.houses.util.orm.manager.querymanager.criteriaquery.CriteriaQuery;
 import apartment.in.houses.util.orm.manager.querymanager.query.Query;
 import apartment.in.houses.util.orm.session.connection.exception.DatabaseException;
@@ -59,7 +59,7 @@ public class SessionImpl implements Session {
         try {
             entityManager.remove(entity);
         } catch (SQLException e) {
-            throw new DatabaseException("");
+            throw new RuntimeException(e);
         }
     }
 
@@ -70,7 +70,7 @@ public class SessionImpl implements Session {
 
     @Override
     public <T> Query<T> createQuery(CriteriaQuery<T> criteriaQuery) {
-        return null;
+        return entityManager.createQuery(criteriaQuery);
     }
 
     @Override

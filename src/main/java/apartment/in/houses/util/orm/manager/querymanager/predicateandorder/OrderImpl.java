@@ -1,6 +1,6 @@
-package apartment.in.houses.util.orm.manager.querymanager.predicateandexpression;
+package apartment.in.houses.util.orm.manager.querymanager.predicateandorder;
 
-import apartment.in.houses.util.orm.manager.querymanager.predicateandexpression.interf.Order;
+import apartment.in.houses.util.orm.manager.querymanager.predicateandorder.interf.Order;
 import apartment.in.houses.util.orm.manager.querymanager.root.Path;
 
 public class OrderImpl implements Order {

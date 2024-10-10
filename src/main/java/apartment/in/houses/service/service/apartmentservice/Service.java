@@ -9,8 +9,7 @@ public interface Service<E, K> {
 
     List<E> getAll();
     E getId(K key) throws NotFoundException;
-
     void add(E entity) throws InvalidException;
     void update(E entity) throws InvalidException;
-    void delete(K key) throws InvalidException;
+    void delete(E entity) throws InvalidException;
 }

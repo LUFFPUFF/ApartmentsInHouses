@@ -1,6 +1,6 @@
 package apartment.in.houses.util.orm.manager.querymanager.root;
 
-import apartment.in.houses.util.orm.manager.entitymanager.util.EntityManagerUtil;
+import apartment.in.houses.util.orm.manager.entitymanager.util.TableUtil;
 
 public class Root<T> {
     private final Class<T> entityClass;
@@ -10,7 +10,7 @@ public class Root<T> {
     }
 
     public <Y> Path<Y> get(String attributeName) {
-        return new Path<>(EntityManagerUtil.getTableName(entityClass), attributeName);
+        return new Path<>(TableUtil.getTableName(entityClass), attributeName);
     }
 
     public Class<?> getEntityClass() {

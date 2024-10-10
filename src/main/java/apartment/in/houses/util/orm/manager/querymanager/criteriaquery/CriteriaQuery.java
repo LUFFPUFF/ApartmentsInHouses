@@ -1,8 +1,7 @@
 package apartment.in.houses.util.orm.manager.querymanager.criteriaquery;
 
-import apartment.in.houses.util.orm.manager.querymanager.predicateandexpression.OrderImpl;
-import apartment.in.houses.util.orm.manager.querymanager.predicateandexpression.interf.Order;
-import apartment.in.houses.util.orm.manager.querymanager.predicateandexpression.interf.Predicate;
+import apartment.in.houses.util.orm.manager.querymanager.predicateandorder.interf.Order;
+import apartment.in.houses.util.orm.manager.querymanager.predicateandorder.interf.Predicate;
 import apartment.in.houses.util.orm.manager.querymanager.root.Root;
 
 public interface CriteriaQuery<T> {
@@ -11,4 +10,5 @@ public interface CriteriaQuery<T> {
     CriteriaQuery<T> where(Predicate... predicates);
     CriteriaQuery<T> orderBy(Order... orders);
     String build();
+    Class<T> getEntityClass();
 }

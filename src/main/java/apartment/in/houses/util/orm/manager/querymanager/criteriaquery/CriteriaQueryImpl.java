@@ -1,9 +1,8 @@
 package apartment.in.houses.util.orm.manager.querymanager.criteriaquery;
 
-import apartment.in.houses.util.orm.manager.entitymanager.util.EntityManagerUtil;
-import apartment.in.houses.util.orm.manager.querymanager.predicateandexpression.OrderImpl;
-import apartment.in.houses.util.orm.manager.querymanager.predicateandexpression.interf.Order;
-import apartment.in.houses.util.orm.manager.querymanager.predicateandexpression.interf.Predicate;
+import apartment.in.houses.util.orm.manager.entitymanager.util.TableUtil;
+import apartment.in.houses.util.orm.manager.querymanager.predicateandorder.interf.Order;
+import apartment.in.houses.util.orm.manager.querymanager.predicateandorder.interf.Predicate;
 import apartment.in.houses.util.orm.manager.querymanager.root.Root;
 
 import java.util.ArrayList;
@@ -45,9 +44,13 @@ public class CriteriaQueryImpl<T> implements CriteriaQuery<T> {
         return this;
     }
 
+    public Class<T> getEntityClass() {
+        return entityClass;
+    }
+
     public String build() {
         StringBuilder sql = new StringBuilder("SELECT * FROM " +
-                EntityManagerUtil.getTableName(entityClass));
+                TableUtil.getTableName(entityClass));
 
         if (!predicates.isEmpty()) {
             sql.append(" WHERE ");

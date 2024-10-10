@@ -1,7 +1,7 @@
 package apartment.in.houses.data_access.registrationdatabase.entities.userrole;
 
-import apartment.in.houses.data_access.util.exucutor.annotation.Column;
 import apartment.in.houses.util.DI.annotation.Component;
+import apartment.in.houses.util.orm.annotation.Column;
 
 @Component
 public class UserRoleId {

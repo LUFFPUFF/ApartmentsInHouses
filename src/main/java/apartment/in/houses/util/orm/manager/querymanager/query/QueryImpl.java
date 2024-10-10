@@ -1,7 +1,8 @@
 package apartment.in.houses.util.orm.manager.querymanager.query;
 
-import apartment.in.houses.util.orm.manager.entitymanager.util.EntityManagerUtil;
-import apartment.in.houses.util.orm.manager.querymanager.query.Query;
+import apartment.in.houses.util.orm.manager.entitymanager.entitymanager.EntityManager;
+import apartment.in.houses.util.orm.manager.entitymanager.entitymanager.EntityManagerImpl;
+import apartment.in.houses.util.orm.manager.entitymanager.util.ResultSetUtil;
 import apartment.in.houses.util.orm.session.interf.Session;
 
 import java.lang.reflect.InvocationTargetException;
@@ -34,7 +35,8 @@ public class QueryImpl<T> implements Query<T> {
         try (ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 T entity = entityClass.getDeclaredConstructor().newInstance();
-                EntityManagerUtil.populateEntityFields(entity, resultSet, entityClass);
+                EntityManager entityManager = new EntityManagerImpl(session);
+                ResultSetUtil.populateEntityFields(entity, resultSet, entityClass, entityManager);
                 results.add(entity);
             }
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {

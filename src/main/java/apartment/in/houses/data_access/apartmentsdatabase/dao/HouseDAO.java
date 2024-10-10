@@ -8,7 +8,7 @@ public interface HouseDAO {
 
     List<House> getAllHouses();
     House getHouse(int id);
-    boolean insert(House apartment);
-    boolean update(House apartment);
-    boolean delete(int id);
+    boolean insert(House house);
+    boolean update(House house);
+    boolean delete(House house);
 }

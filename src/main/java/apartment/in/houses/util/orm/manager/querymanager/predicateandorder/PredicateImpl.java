@@ -1,6 +1,6 @@
-package apartment.in.houses.util.orm.manager.querymanager.predicateandexpression;
+package apartment.in.houses.util.orm.manager.querymanager.predicateandorder;
 
-import apartment.in.houses.util.orm.manager.querymanager.predicateandexpression.interf.Predicate;
+import apartment.in.houses.util.orm.manager.querymanager.predicateandorder.interf.Predicate;
 
 public class PredicateImpl implements Predicate {
 

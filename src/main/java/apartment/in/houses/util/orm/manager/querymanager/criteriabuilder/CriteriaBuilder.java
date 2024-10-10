@@ -1,9 +1,8 @@
 package apartment.in.houses.util.orm.manager.querymanager.criteriabuilder;
 
 import apartment.in.houses.util.orm.manager.querymanager.criteriaquery.CriteriaQuery;
-import apartment.in.houses.util.orm.manager.querymanager.predicateandexpression.OrderImpl;
-import apartment.in.houses.util.orm.manager.querymanager.predicateandexpression.interf.Order;
-import apartment.in.houses.util.orm.manager.querymanager.predicateandexpression.interf.Predicate;
+import apartment.in.houses.util.orm.manager.querymanager.predicateandorder.interf.Order;
+import apartment.in.houses.util.orm.manager.querymanager.predicateandorder.interf.Predicate;
 import apartment.in.houses.util.orm.manager.querymanager.root.Path;
 
 public interface CriteriaBuilder {

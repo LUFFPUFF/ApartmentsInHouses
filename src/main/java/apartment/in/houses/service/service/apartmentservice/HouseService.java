@@ -46,10 +46,10 @@ public class HouseService implements Service<House, Integer> {
     }
 
     @Override
-    public void delete(Integer id) throws InvalidException {
-        if (id < 0) {
+    public void delete(House house) throws InvalidException {
+        if (house.getId() < 0) {
             throw new InvalidException("Id house must be positive");
         }
-        repository.delete(id);
+        repository.delete(house);
     }
 }

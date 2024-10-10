@@ -9,5 +9,5 @@ public interface ApartmentDAO {
     Apartment getApartment(int id);
     boolean insert(Apartment apartment);
     boolean update(Apartment apartment);
-    boolean delete(Integer id);
+    boolean delete(Apartment apartment);
 }

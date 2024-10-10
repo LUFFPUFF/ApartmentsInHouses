@@ -9,7 +9,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface GeneratedValue {
     GenerationType strategy();
-
     enum GenerationType {
         IDENTITY, SEQUENCE, TABLE
     }

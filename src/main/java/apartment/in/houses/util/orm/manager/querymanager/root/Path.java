@@ -9,14 +9,6 @@ public class Path<T> {
         this.tableName = tableName;
         this.attributeName = attributeName;
     }
-
-    public String getAttributeName() {
-        return attributeName;
-    }
-
-    public String getTableName() {
-        return tableName;
-    }
     public String toSql() {
         return tableName + "." + attributeName;
     }

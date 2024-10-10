@@ -1,14 +1,12 @@
 package apartment.in.houses.data_access.apartmentsdatabase.entities;
 
-import apartment.in.houses.data_access.util.exucutor.annotation.Id;
 import apartment.in.houses.util.DI.annotation.Component;
-import apartment.in.houses.data_access.util.exucutor.annotation.Column;
-import apartment.in.houses.data_access.util.exucutor.annotation.Table;
-import apartment.in.houses.util.orm.annotation.ManyToOne;
+import apartment.in.houses.util.orm.annotation.*;
 
 import java.io.Serializable;
 
 @Component
+@Entity
 @Table(name = "Apartments")
 public class Apartment implements Serializable {
 
@@ -17,11 +15,13 @@ public class Apartment implements Serializable {
     }
 
     @Id
+    @GeneratedValue(strategy = GeneratedValue.GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
+    @ManyToOne(targetEntity = House.class, optional = false)
     @Column(name = "house_id")
-    private House houseId;
+    private House house;
     @Column(name = "total_area")
     private double totalArea;
     @Column(name = "living_area")
@@ -37,9 +37,9 @@ public class Apartment implements Serializable {
     @Column(name = "sale_condition")
     private String saleCondition;
 
-    public Apartment(int id, House houseId, double totalArea, double livingArea, int rooms, int floor, int entrance, double price, String saleCondition) {
+    public Apartment(int id, House house, double totalArea, double livingArea, int rooms, int floor, int entrance, double price, String saleCondition) {
         this.id = id;
-        this.houseId = houseId;
+        this.house = house;
         this.totalArea = totalArea;
         this.livingArea = livingArea;
         this.rooms = rooms;
@@ -63,11 +63,11 @@ public class Apartment implements Serializable {
 
     public House getHouseId() {
 
-        return houseId;
+        return house;
     }
 
     public void setHouseId(House houseId) {
-        this.houseId = houseId;
+        this.house = houseId;
     }
 
     public double getTotalArea() {
@@ -130,7 +130,7 @@ public class Apartment implements Serializable {
     public String toString() {
         return "Apartment{" +
                 "id=" + id +
-                ", house_id=" + houseId +
+                ", house_id=" + house +
                 ", totalArea=" + totalArea +
                 ", livingArea=" + livingArea +
                 ", rooms=" + rooms +
