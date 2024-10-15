@@ -1,8 +1,7 @@
 package apartment.in.houses.data_access.apartmentsdatabase.repositories;
 
-import apartment.in.houses.data_access.apartmentsdatabase.dao.HouseDAO;
-import apartment.in.houses.data_access.apartmentsdatabase.entities.House;
-import apartment.in.houses.util.DI.annotation.Component;
+import apartment.in.houses.data_access.apartmentsdatabase.dao.ClientDAO;
+import apartment.in.houses.data_access.apartmentsdatabase.entities.Client;
 import apartment.in.houses.util.orm.manager.querymanager.criteriabuilder.CriteriaBuilder;
 import apartment.in.houses.util.orm.manager.querymanager.criteriabuilder.CriteriaBuilderImpl;
 import apartment.in.houses.util.orm.manager.querymanager.criteriaquery.CriteriaQuery;
@@ -15,20 +14,19 @@ import apartment.in.houses.util.orm.transaction.interf.Transaction;
 import java.sql.SQLException;
 import java.util.List;
 
-@Component
-public class HouseRepository implements HouseDAO {
+public class ClientRepository implements ClientDAO {
 
     private static final SessionFactory sessionFactory =
             ConnectionManagerImpl.getSessionFactory();
     @Override
-    public List<House> getAllHouses() {
+    public List<Client> getAllClients() {
         Session session = sessionFactory.openSession();
         try {
             Transaction transaction = session.beginTransaction();
 
             CriteriaBuilder builder = new CriteriaBuilderImpl();
-            CriteriaQuery<House> query = builder.createQuery(House.class);
-            Root<House> root = query.from(House.class);
+            CriteriaQuery<Client> query = builder.createQuery(Client.class);
+            Root<Client> root = query.from(Client.class);
 
             query.select(root);
 
@@ -43,26 +41,28 @@ public class HouseRepository implements HouseDAO {
     }
 
     @Override
-    public House getHouse(int id) {
-        House house;
+    public Client getClient(int id) {
+        Session session = sessionFactory.openSession();
+        Client client;
         try {
-            Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
-            house = session.get(House.class, id);
+            client = session.get(Client.class, id);
             transaction.commit();
+            return client;
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
+        } finally {
+            session.close();
         }
-        return house;
     }
 
     @Override
-    public boolean insert(House house) {
+    public boolean insert(Client client) {
         Session session = sessionFactory.openSession();
         try {
             Transaction transaction = session.beginTransaction();
 
-            session.save(house);
+            session.save(client);
 
             transaction.commit();
             return true;
@@ -72,17 +72,17 @@ public class HouseRepository implements HouseDAO {
     }
 
     @Override
-    public boolean update(House house) {
+    public boolean update(Client client) {
         return false;
     }
 
     @Override
-    public boolean delete(House house) {
+    public boolean delete(Client client) {
         Session session = sessionFactory.openSession();
         try {
             Transaction transaction = session.beginTransaction();
 
-            session.delete(house);
+            session.delete(client);
 
             transaction.commit();
             return true;

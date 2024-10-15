@@ -94,7 +94,6 @@ public class EntityManagerImpl implements EntityManager {
             throw new IllegalArgumentException("Class " + entityClass.getName() + " is not a mapped entity.");
         }
 
-
         String tableName = ConfiguratorLoader.getTableName(entityClass);
         String primaryKeyName = FieldUtil.getPrimaryKeyName(entityClass);
 

@@ -2,25 +2,28 @@ package apartment.in.houses.data_access.apartmentsdatabase.repositories;
 
 import apartment.in.houses.data_access.apartmentsdatabase.dao.ApartmentDAO;
 import apartment.in.houses.data_access.apartmentsdatabase.entities.Apartment;
+
 import apartment.in.houses.util.DI.annotation.Component;
 import apartment.in.houses.util.orm.manager.querymanager.criteriabuilder.CriteriaBuilder;
 import apartment.in.houses.util.orm.manager.querymanager.criteriabuilder.CriteriaBuilderImpl;
 import apartment.in.houses.util.orm.manager.querymanager.criteriaquery.CriteriaQuery;
 import apartment.in.houses.util.orm.manager.querymanager.root.Root;
-import apartment.in.houses.util.orm.session.connection.ConnectionManagerFactory;
+import apartment.in.houses.util.orm.session.connection.ConnectionManagerImpl;
+import apartment.in.houses.util.orm.session.connection.interf.ConnectionManager;
 import apartment.in.houses.util.orm.session.interf.Session;
 import apartment.in.houses.util.orm.session.interf.SessionFactory;
 import apartment.in.houses.util.orm.transaction.interf.Transaction;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class ApartmentRepository implements ApartmentDAO {
 
-    private static final SessionFactory sessionFactory =
-            ConnectionManagerFactory.createSessionFactory();
+    public ApartmentRepository() {
+    }
+
+    private static final SessionFactory sessionFactory = ConnectionManagerImpl.getSessionFactory();
 
     @Override
     public List<Apartment> getAllApartments() {

@@ -12,9 +12,15 @@ import java.util.stream.Collectors;
 
 @Component
 public class ApartmentService implements Service<Apartment, Integer> {
-
     @Autowired
     private ApartmentRepository repository;
+
+    public ApartmentService() {
+    }
+
+    public ApartmentService(ApartmentRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public List<Apartment> getAll() {

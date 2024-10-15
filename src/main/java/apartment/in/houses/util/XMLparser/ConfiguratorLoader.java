@@ -6,19 +6,24 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ConfiguratorLoader {
-
     private static final Map<Class<?>, String> entityMappings = new HashMap<>();
     private static final String configPath = "src/main/resources/jdbc-config.xml";
+    static InputStream inputStream = ConfiguratorLoader.class.getClassLoader().getResourceAsStream("jdbc-config.xml");
 
-    static  {
+    static {
         try {
+            if (inputStream == null) {
+                throw new RuntimeException("Configuration file not found: " + configPath);
+            }
+
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(configPath);
+            Document doc = builder.parse(inputStream);
             doc.getDocumentElement().normalize();
 
             NodeList entities = doc.getElementsByTagName("entity");
@@ -33,6 +38,14 @@ public class ConfiguratorLoader {
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Error loading configuration file: " + e.getMessage());
+        } finally {
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

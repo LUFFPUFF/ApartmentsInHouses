@@ -6,7 +6,7 @@ import apartment.in.houses.util.orm.manager.querymanager.criteriabuilder.Criteri
 import apartment.in.houses.util.orm.manager.querymanager.criteriabuilder.CriteriaBuilderImpl;
 import apartment.in.houses.util.orm.manager.querymanager.criteriaquery.CriteriaQuery;
 import apartment.in.houses.util.orm.manager.querymanager.root.Root;
-import apartment.in.houses.util.orm.session.connection.ConnectionManagerFactory;
+import apartment.in.houses.util.orm.session.connection.ConnectionManagerImpl;
 import apartment.in.houses.util.orm.session.interf.Session;
 import apartment.in.houses.util.orm.session.interf.SessionFactory;
 import apartment.in.houses.util.orm.transaction.interf.Transaction;
@@ -25,7 +25,7 @@ public class Test {
 
     public static void testCriteriaQuery() {
 
-        SessionFactory sessionFactory = ConnectionManagerFactory.createSessionFactory();
+        SessionFactory sessionFactory = ConnectionManagerImpl.getSessionFactory();
         Session session = sessionFactory.openSession();
 
         try {
@@ -58,7 +58,7 @@ public class Test {
     }
 
     public static void testGeneratedValue() {
-        SessionFactory sessionFactory = ConnectionManagerFactory.createSessionFactory();
+        SessionFactory sessionFactory = ConnectionManagerImpl.getSessionFactory();
         Session session = sessionFactory.openSession();
 
         try {

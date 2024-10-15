@@ -1,5 +1,6 @@
 package apartment.in.houses.service.service.apartmentservice;
 
+import apartment.in.houses.data_access.apartmentsdatabase.entities.Apartment;
 import apartment.in.houses.data_access.apartmentsdatabase.entities.House;
 import apartment.in.houses.service.service.apartmentservice.ApartmentService;
 import apartment.in.houses.service.service.apartmentservice.HouseService;
@@ -12,15 +13,11 @@ public class TestService {
     public static void main(String[] args) {
         ApplicationContext context = new ApplicationContext("java");
 
-        context.refresh();
-
         ApartmentService service = context.getBean(ApartmentService.class);
-        HouseService houseService = context.getBean(HouseService.class);
 
-        System.out.println("Все квартиры: ");
-        List<House> houses = houseService.getAll();
+        List<Apartment> apartments = service.getAll();
 
-        for (House apartment : houses) {
+        for (Apartment apartment : apartments) {
             System.out.println(apartment);
         }
     }

@@ -1,21 +1,43 @@
 package apartment.in.houses.data_access.apartmentsdatabase.entities;
 
+import apartment.in.houses.util.DI.annotation.Component;
+import apartment.in.houses.util.orm.annotation.*;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Component
+@Entity
+@Table(name = "Client")
 public class Client implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GeneratedValue.GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    private Apartment apartment_id;
+
+    @ManyToOne(targetEntity = Apartment.class, optional = false)
+    @Column(name = "apartment_id")
+    private Apartment apartmentId;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "phone_number")
     private int phoneNumber;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "passport_number")
     private String passportNumber;
+
+    @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
     public Client(int id, Apartment apartment_id, String name, int phoneNumber, String email, String passportNumber, Date dateOfBirth) {
         this.id = id;
-        this.apartment_id = apartment_id;
+        this.apartmentId = apartment_id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -31,12 +53,12 @@ public class Client implements Serializable {
         this.id = id;
     }
 
-    public Apartment getApartment_id() {
-        return apartment_id;
+    public Apartment getApartmentId() {
+        return apartmentId;
     }
 
-    public void setApartment_id(Apartment apartment_id) {
-        this.apartment_id = apartment_id;
+    public void setApartmentId(Apartment apartmentId) {
+        this.apartmentId = apartmentId;
     }
 
     public String getName() {
