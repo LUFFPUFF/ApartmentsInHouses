@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<settings>
-    <insertt>INSERT INTO %s (%s) VALUES (%s)</insertt>
-    <update>UPDATE %s SET %s WHERE %s = ?</update>
-    <delete>DELETE FROM %s WHERE %s = ?</delete>
-    <get_all>SELECT * FROM %s</get_all>
-    <get_id>SELECT * FROM %s WHERE %s = ?</get_id>
-</settings>

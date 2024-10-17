@@ -1,11 +1,8 @@
 package apartment.in.houses.util.DI.configurator;
 
 import apartment.in.houses.util.DI.annotation.Component;
-import apartment.in.houses.util.DI.annotation.PostConstructor;
-import apartment.in.houses.util.DI.postprocessor.BeanPostProcessorInterface;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.*;
 
 public class JavaBeanConfigurator implements BeanConfigurator {

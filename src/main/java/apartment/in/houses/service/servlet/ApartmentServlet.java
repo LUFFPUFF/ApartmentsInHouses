@@ -1,6 +1,7 @@
 package apartment.in.houses.service.servlet;
 
 import apartment.in.houses.data_access.apartmentsdatabase.entities.Apartment;
+import apartment.in.houses.data_access.apartmentsdatabase.repositories.ApartmentRepository;
 import apartment.in.houses.service.service.apartmentservice.ApartmentService;
 import apartment.in.houses.util.DI.context.ApplicationContext;
 import jakarta.servlet.ServletConfig;
@@ -11,7 +12,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet("/apartment")
 public class ApartmentServlet extends HttpServlet {
@@ -30,52 +37,36 @@ public class ApartmentServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         ApplicationContext context = new ApplicationContext("java");
-        this.apartmentService = context.getBean(ApartmentService.class);
+        this.apartmentService = new ApartmentService(new ApartmentRepository());
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        String resourcePath = "/pages/index.html";
+        InputStream inputStream = getServletContext().getResourceAsStream(resourcePath);
 
-        List<Apartment> apartments = apartmentService.getAll();
-        StringBuilder htmlResponse = new StringBuilder();
+        String htmlContent = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
 
-        htmlResponse.append("<!DOCTYPE html>")
-                .append("<html lang='en'>")
-                .append("<head>")
-                .append("<meta charset='UTF-8'>")
-                .append("<meta name='viewport' content='width=device-width, initial-scale=1.0'>")
-                .append("<title>Available Apartments</title>")
-                .append("<style>")
-                .append("body { font-family: Arial, sans-serif; background-color: #f5f5f5; }")
-                .append(".container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px; }")
-                .append(".apartment-card { background-color: #fff; border: 1px solid #ddd; border-radius: 8px; width: 300px; padding: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }")
-                .append(".apartment-title { font-size: 18px; font-weight: bold; margin-bottom: 10px; }")
-                .append(".apartment-detail { margin-bottom: 8px; }")
-                .append("</style>")
-                .append("</head>")
-                .append("<body>")
-                .append("<h1 style='text-align: center;'>Available Apartments</h1>")
-                .append("<div class='container'>");
+        List<Apartment> apartments = apartmentService.getAll().stream()
+                .limit(5)
+                .collect(Collectors.toList());
 
+        StringBuilder apartmentsHtml = new StringBuilder();
         for (Apartment apartment : apartments) {
-            htmlResponse.append("<div class='apartment-card'>")
-                    .append("<div class='apartment-title'>Apartment ID: ").append(apartment.getId()).append("</div>")
-                    .append("<div class='apartment-detail'>Address: ").append(apartment.getHouseId().getAddress()).append("</div>")
-                    .append("<div class='apartment-detail'>Total Area: ").append(apartment.getTotalArea()).append(" sq.m</div>")
-                    .append("<div class='apartment-detail'>Living Area: ").append(apartment.getLivingArea()).append(" sq.m</div>")
-                    .append("<div class='apartment-detail'>Rooms: ").append(apartment.getRooms()).append("</div>")
-                    .append("<div class='apartment-detail'>Floor: ").append(apartment.getFloor()).append("</div>")
-                    .append("<div class='apartment-detail'>Entrance: ").append(apartment.getEntrance()).append("</div>")
-                    .append("<div class='apartment-detail'>Price: $").append(apartment.getPrice()).append("</div>")
-                    .append("<div class='apartment-detail'>Status: ").append(apartment.getSaleCondition()).append("</div>")
+            apartmentsHtml.append("<div class=\"apartment\">")
+                    .append("<p>Адрес: ").append(apartment.getHouseId().getAddress()).append("</p>")
+                    .append("<p>Комнат: ").append(apartment.getRooms()).append("</p>")
+                    .append("<p>Площадь: ").append(apartment.getTotalArea()).append(" м²</p>")
                     .append("</div>");
         }
 
-        htmlResponse.append("</div>")
-                .append("</body>")
-                .append("</html>");
+        String modifiedHtml = htmlContent.replace("<!-- Динамическое содержимое о квартирах -->", apartmentsHtml.toString());
 
-        response.getWriter().write(htmlResponse.toString());
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+
+        PrintWriter out = response.getWriter();
+        out.print(modifiedHtml);
     }
+
 }
