@@ -1,11 +1,13 @@
 package apartment.in.houses.util.orm.manager.entitymanager.util;
 
 import apartment.in.houses.util.orm.annotation.Column;
+import apartment.in.houses.util.orm.annotation.Embeddable;
+import apartment.in.houses.util.orm.annotation.EmbeddedId;
 import apartment.in.houses.util.orm.annotation.Table;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.SQLException;
+import java.util.*;
 
 public class TableUtil {
     /**
@@ -20,9 +22,6 @@ public class TableUtil {
         }
     }
 
-    /**
-     * Получение списка имен столбцов из аннотаций @Column
-     */
     public static List<String> getColumnNames(Class<?> classEntity) {
         List<String> columnNames = new ArrayList<>();
         for (Field field : classEntity.getDeclaredFields()) {
@@ -43,5 +42,33 @@ public class TableUtil {
             return columnAnnotation.name();
         }
         throw new IllegalArgumentException("Field must have @Column annotation: " + field.getName());
+    }
+
+    public static List<String> getEmbeddedColumnNames(Class<?> embeddedClass) {
+        List<String> columnNames = new ArrayList<>();
+
+        // Проверяем, что класс помечен аннотацией @Embeddable
+        if (!embeddedClass.isAnnotationPresent(Embeddable.class)) {
+            throw new IllegalArgumentException("Class " + embeddedClass.getName() + " is not annotated with @Embeddable.");
+        }
+
+        // Проходим по всем полям класса составного ключа
+        Field[] fields = embeddedClass.getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true); // Делаем поле доступным для извлечения
+
+            // Получаем аннотацию @Column, если она есть
+            Column columnAnnotation = field.getAnnotation(Column.class);
+
+            if (columnAnnotation != null && !columnAnnotation.name().isEmpty()) {
+                // Используем имя из аннотации @Column
+                columnNames.add(columnAnnotation.name());
+            } else {
+                // Если аннотации @Column нет, используем имя поля
+                columnNames.add(field.getName());
+            }
+        }
+
+        return columnNames;
     }
 }

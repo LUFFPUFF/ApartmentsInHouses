@@ -1,4 +1,4 @@
-package apartment.in.houses.data_access.apartmentsdatabase.entities;
+package apartment.in.houses.data_access.apartmentsdatabase.entitie;
 
 import apartment.in.houses.util.DI.annotation.Component;
 import apartment.in.houses.util.orm.annotation.*;
@@ -18,7 +18,7 @@ public class Client implements Serializable {
 
     @ManyToOne(targetEntity = Apartment.class, optional = false)
     @Column(name = "apartment_id")
-    private Apartment apartmentId;
+    private Apartment apartment;
 
     @Column(name = "name")
     private String name;
@@ -37,7 +37,7 @@ public class Client implements Serializable {
 
     public Client(int id, Apartment apartment_id, String name, int phoneNumber, String email, String passportNumber, Date dateOfBirth) {
         this.id = id;
-        this.apartmentId = apartment_id;
+        this.apartment = apartment_id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -53,12 +53,12 @@ public class Client implements Serializable {
         this.id = id;
     }
 
-    public Apartment getApartmentId() {
-        return apartmentId;
+    public Apartment getApartment() {
+        return apartment;
     }
 
-    public void setApartmentId(Apartment apartmentId) {
-        this.apartmentId = apartmentId;
+    public void setApartment(Apartment apartment) {
+        this.apartment = apartment;
     }
 
     public String getName() {

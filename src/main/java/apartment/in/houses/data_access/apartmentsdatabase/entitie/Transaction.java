@@ -1,4 +1,4 @@
-package apartment.in.houses.data_access.apartmentsdatabase.entities;
+package apartment.in.houses.data_access.apartmentsdatabase.entitie;
 
 import java.io.Serializable;
 import java.util.Date;

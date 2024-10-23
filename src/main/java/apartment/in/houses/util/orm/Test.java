@@ -1,6 +1,6 @@
 package apartment.in.houses.util.orm;
 
-import apartment.in.houses.data_access.apartmentsdatabase.entities.Apartment;
+import apartment.in.houses.data_access.apartmentsdatabase.entitie.*;
 import apartment.in.houses.util.orm.manager.querymanager.criteriabuilder.CriteriaBuilder;
 import apartment.in.houses.util.orm.manager.querymanager.criteriabuilder.CriteriaBuilderImpl;
 import apartment.in.houses.util.orm.manager.querymanager.criteriaquery.CriteriaQuery;
@@ -17,7 +17,7 @@ public class Test {
 
     public static void main(String[] args) {
 
-        testCriteriaQuery();
+        testEmbeddable();
 
     }
 
@@ -39,10 +39,6 @@ public class Test {
             List<Apartment> apartments = session.createQuery(query).getResultList();
 
             for (Apartment apartment : apartments) {
-                System.out.println(apartment.getHouseId().getId());
-            }
-
-            for (Apartment apartment : apartments) {
                 System.out.println(apartment);
             }
 
@@ -52,6 +48,31 @@ public class Test {
             throw new RuntimeException(e);
         }
 
+
+    }
+
+    private static void testEmbeddable() {
+        Role role = new Role();
+        role.setId(1);
+        role.setName("SUPER");
+
+        Permission permission = new Permission();
+        permission.setId(1);
+        permission.setName("BOG");
+
+        RolePermissionId id = new RolePermissionId();
+        id.setPermission_id(permission.getId());
+        id.setRole_id(role.getId());
+
+        RolePermission rolePermission = new RolePermission();
+        rolePermission.setId(id);
+        rolePermission.setRole(role);
+        rolePermission.setPermission(permission);
+
+        SessionFactory sessionFactory = ConnectionManagerImpl.getSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        session.save(rolePermission);
 
     }
 }

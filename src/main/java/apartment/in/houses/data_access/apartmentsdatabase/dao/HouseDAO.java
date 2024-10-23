@@ -1,6 +1,6 @@
 package apartment.in.houses.data_access.apartmentsdatabase.dao;
 
-import apartment.in.houses.data_access.apartmentsdatabase.entities.House;
+import apartment.in.houses.data_access.apartmentsdatabase.entitie.House;
 
 import java.util.List;
 

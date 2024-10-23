@@ -1,6 +1,7 @@
 package apartment.in.houses.util.orm.manager.entitymanager.util;
 
 import apartment.in.houses.util.orm.annotation.Column;
+import apartment.in.houses.util.orm.annotation.EmbeddedId;
 import apartment.in.houses.util.orm.annotation.ManyToOne;
 import apartment.in.houses.util.orm.manager.entitymanager.entitymanager.EntityManager;
 
@@ -12,9 +13,6 @@ import java.util.List;
 
 public class ResultSetUtil {
 
-    /**
-     * Заполнение полей объекта из ResultSet
-     */
     public static <T> void populateEntityFields(T entity, ResultSet resultSet, Class<?> entityClass, EntityManager entityManager) throws NoSuchFieldException, IllegalAccessException, SQLException {
         List<String> columnNames = TableUtil.getColumnNames(entityClass);
         for (int i = 1; i <= columnNames.size(); i++) {
@@ -43,3 +41,4 @@ public class ResultSetUtil {
         }
     }
 }
+

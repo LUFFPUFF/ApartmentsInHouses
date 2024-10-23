@@ -42,6 +42,8 @@ public class SessionImpl implements Session {
             entityManager.persist(entity);
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
     }
 

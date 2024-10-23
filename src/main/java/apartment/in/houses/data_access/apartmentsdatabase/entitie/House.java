@@ -1,11 +1,10 @@
-package apartment.in.houses.data_access.apartmentsdatabase.entities;
+package apartment.in.houses.data_access.apartmentsdatabase.entitie;
 
 import apartment.in.houses.util.DI.annotation.Component;
 import apartment.in.houses.util.orm.annotation.*;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 
 @Component
 @Entity
@@ -16,6 +15,10 @@ public class House implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy = GeneratedValue.GenerationType.IDENTITY)
     private int id;
+
+    @ManyToOne(targetEntity = Admin.class, optional = false)
+    @Column(name = "admin_id")
+    private Admin admin;
     @Column(name = "address")
     private String address;
 
@@ -29,21 +32,6 @@ public class House implements Serializable {
 
     @Column(name = "commissioning_date")
     private Date commissioning_date;
-
-    @OneToMany(mappedBy = "house_id")
-    private List<Apartment> apartments;
-
-    public House() {
-    }
-
-    public House(int id, String address, String name, Date start_construction_date, Date end_construction_date, Date commissioning_date) {
-        this.id = id;
-        this.address = address;
-        this.name = name;
-        this.start_construction_date = start_construction_date;
-        this.end_construction_date = end_construction_date;
-        this.commissioning_date = commissioning_date;
-    }
 
     public int getId() {
         return id;

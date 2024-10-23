@@ -1,17 +1,17 @@
-package apartment.in.houses.data_access.apartmentsdatabase.entities;
+package apartment.in.houses.data_access.apartmentsdatabase.entitie;
 
 import java.io.Serializable;
 
 public class FloorPlan implements Serializable {
 
     private int id;
-    private House houseId;
+    private House house;
     private int floorNumber;
     private String imagePath;
 
     public FloorPlan(int id, House houseId, int floorNumber, String imagePath) {
         this.id = id;
-        this.houseId = houseId;
+        this.house = houseId;
         this.floorNumber = floorNumber;
         this.imagePath = imagePath;
     }
@@ -24,12 +24,12 @@ public class FloorPlan implements Serializable {
         this.id = id;
     }
 
-    public int getHouseId() {
-        return houseId.getId();
+    public int getHouse() {
+        return house.getId();
     }
 
-    public void setHouseId(House houseId) {
-        this.houseId = houseId;
+    public void setHouse(House house) {
+        this.house = house;
     }
 
     public int getFloorNumber() {

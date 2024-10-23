@@ -14,6 +14,8 @@ public class FormatSQLUtil {
         );
     }
 
+
+
     public static String delete(String tableName, String primaryKeyName) {
         return String.format(
                 "DELETE FROM %s WHERE %s = ?",
@@ -26,6 +28,35 @@ public class FormatSQLUtil {
                 "SELECT * FROM %s WHERE %s = ?",
                 tableName,
                 primaryKeyName);
+    }
+
+    public static String getWithEmbeddedId(String tableName, List<String> embeddedIdColumnNames) {
+        String whereClause = whereClause(embeddedIdColumnNames);
+
+        return String.format(
+                "SELECT * FROM %s WHERE %s",
+                tableName,
+                whereClause);
+    }
+
+    public static String deleteWithEmbeddedId(String tableName, List<String> embeddedIdColumnNames) {
+        String whereClause = whereClause(embeddedIdColumnNames);
+
+        return String.format(
+                "DELETE FROM %s WHERE %s",
+                tableName,
+                whereClause);
+    }
+
+    private static String whereClause(List<String> embeddedIdColumnNames) {
+        StringBuilder whereClause = new StringBuilder();
+        for (int i = 0; i < embeddedIdColumnNames.size(); i++) {
+            whereClause.append(embeddedIdColumnNames.get(i)).append(" = ?");
+            if (i < embeddedIdColumnNames.size() - 1) {
+                whereClause.append(" AND ");
+            }
+        }
+        return whereClause.toString();
     }
 
     public static String getOneToManyQuery(String tableName, String foreignKeyColumn) {

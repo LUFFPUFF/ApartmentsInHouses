@@ -1,4 +1,4 @@
-package apartment.in.houses.data_access.apartmentsdatabase.entities;
+package apartment.in.houses.data_access.apartmentsdatabase.entitie;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -7,6 +7,7 @@ public class Reservation implements Serializable {
 
     private int id;
     private Apartment apartmentId;
+    private Client client;
     private House houseId;
     private Date reservationDate;
     private Date expiryDate;

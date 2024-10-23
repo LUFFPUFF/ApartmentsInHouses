@@ -1,4 +1,4 @@
-package apartment.in.houses.data_access.apartmentsdatabase.entities;
+package apartment.in.houses.data_access.apartmentsdatabase.entitie;
 
 import apartment.in.houses.util.DI.annotation.Component;
 import apartment.in.houses.util.orm.annotation.*;

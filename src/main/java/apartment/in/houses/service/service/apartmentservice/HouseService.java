@@ -3,7 +3,7 @@ package apartment.in.houses.service.service.apartmentservice;
 import apartment.in.houses.data_access.apartmentsdatabase.repositories.HouseRepository;
 import apartment.in.houses.service.exceprion.NotFoundException;
 import apartment.in.houses.service.exceprion.InvalidException;
-import apartment.in.houses.data_access.apartmentsdatabase.entities.House;
+import apartment.in.houses.data_access.apartmentsdatabase.entitie.House;
 import apartment.in.houses.util.DI.annotation.Autowired;
 import apartment.in.houses.util.DI.annotation.Component;
 

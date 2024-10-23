@@ -1,7 +1,6 @@
 package apartment.in.houses.service.servlet;
 
-import apartment.in.houses.data_access.apartmentsdatabase.entities.Apartment;
-import apartment.in.houses.data_access.apartmentsdatabase.repositories.ApartmentRepository;
+import apartment.in.houses.data_access.apartmentsdatabase.entitie.Apartment;
 import apartment.in.houses.service.service.apartmentservice.ApartmentService;
 import apartment.in.houses.util.DI.context.ApplicationContext;
 import jakarta.servlet.ServletConfig;
@@ -15,8 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +34,7 @@ public class ApartmentServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         ApplicationContext context = new ApplicationContext("java");
-        this.apartmentService = new ApartmentService(new ApartmentRepository());
+        this.apartmentService = context.getBean(ApartmentService.class);
     }
 
     @Override

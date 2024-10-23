@@ -47,7 +47,7 @@ public class RelationshipUtil {
         ManyToOne annotation = field.getAnnotation(ManyToOne.class);
         Class<?> targetEntity = annotation.targetEntity();
 
-        Object relatedEntity = FieldUtil.getFieldValue(entity, field.getName());
+        Object relatedEntity = FieldUtil.getFieldValue(entity, field);
 
         if (relatedEntity != null) {
             Object foreignKeyValue;
@@ -80,8 +80,6 @@ public class RelationshipUtil {
             throw new SQLException("Related entity is null for field: " + field.getName());
         }
     }
-
-
 
 
     private static <T> void processOneToManyRelationship(T entity, Field field, Session session, EntityManager entityManager) throws SQLException {

@@ -8,7 +8,11 @@
     <initialPoolSize>5</initialPoolSize>
 
     <mapping>
-        <entity class="apartment.in.houses.data_access.apartmentsdatabase.entities.Apartment" table = "Apartments"/>
-        <entity class="apartment.in.houses.data_access.apartmentsdatabase.entities.House" table = "Houses"/>
+        <entity class="apartment.in.houses.data_access.apartmentsdatabase.entitie.Apartment" table = "Apartments"/>
+        <entity class="apartment.in.houses.data_access.apartmentsdatabase.entitie.House" table = "Houses"/>
+        <entity class="apartment.in.houses.data_access.apartmentsdatabase.entitie.RolePermission" table="RolesPermissions"/>
+        <entity class="apartment.in.houses.data_access.apartmentsdatabase.entitie.Admin" table="Admins"/>
+        <entity class="apartment.in.houses.data_access.apartmentsdatabase.entitie.Role" table="Roles"/>
+        <entity class="apartment.in.houses.data_access.apartmentsdatabase.entitie.Permission" table="Permissions"/>
     </mapping>
 </settings>

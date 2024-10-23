@@ -1,7 +1,7 @@
 package apartment.in.houses.data_access.apartmentsdatabase.repositories;
 
 import apartment.in.houses.data_access.apartmentsdatabase.dao.HouseDAO;
-import apartment.in.houses.data_access.apartmentsdatabase.entities.House;
+import apartment.in.houses.data_access.apartmentsdatabase.entitie.House;
 import apartment.in.houses.util.DI.annotation.Component;
 import apartment.in.houses.util.orm.manager.querymanager.criteriabuilder.CriteriaBuilder;
 import apartment.in.houses.util.orm.manager.querymanager.criteriabuilder.CriteriaBuilderImpl;
