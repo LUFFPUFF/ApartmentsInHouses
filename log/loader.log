@@ -1,0 +1,33 @@
+[2024-11-14 02:24:01] [WARNING] JSON file not found, using default configuration.
+[2024-11-14 02:28:11] [INFO] Configuration loaded is Properties
+[2024-11-14 02:37:51] [INFO] Configuration loaded is Properties
+[2024-11-14 02:37:51] [INFO] Configuration loaded is Properties
+[2024-11-14 02:37:51] [INFO] Configuration loaded is Properties
+[2024-11-14 02:37:51] [INFO] Configuration loaded is Properties
+[2024-11-14 02:38:21] [INFO] Configuration loaded is Properties
+[2024-11-14 02:38:25] [INFO] Configuration loaded is Properties
+[2024-11-14 02:38:25] [INFO] Configuration loaded is Properties
+[2024-11-14 02:38:25] [INFO] Configuration loaded is Properties
+[2024-11-14 02:38:25] [INFO] Configuration loaded is Properties
+[2024-11-14 13:05:19] [INFO] Configuration loaded is Properties
+[2024-11-14 13:05:19] [INFO] Configuration loaded is Properties
+[2024-11-14 13:05:19] [INFO] Configuration loaded is Properties
+[2024-11-14 13:05:19] [INFO] Configuration loaded is Properties
+[2024-11-14 14:08:46] [INFO] Configuration loaded is Properties
+[2024-11-14 14:11:31] [INFO] Configuration loaded is Properties
+[2024-11-14 14:16:24] [INFO] Configuration loaded is Properties
+[2024-11-14 14:20:23] [INFO] Configuration loaded is Properties
+[2024-11-14 16:27:29] [INFO] Configuration loaded is Properties
+[2024-11-14 16:27:29] [ERROR] Error setting configuration field: host
+[2024-11-14 16:27:29] [ERROR] Error setting configuration field: serverConfig
+[2024-11-14 16:29:17] [INFO] Configuration loaded is Properties
+[2024-11-14 16:29:17] [ERROR] Error setting configuration field: keystorePath
+[2024-11-14 16:29:17] [ERROR] Error setting configuration field: securityConfig
+[2024-11-14 16:31:22] [INFO] Configuration loaded is Properties
+[2024-11-14 16:31:22] [ERROR] Error setting configuration field: keystorePassword
+[2024-11-14 16:31:22] [ERROR] Error setting configuration field: securityConfig
+[2024-11-14 16:31:41] [INFO] Configuration loaded is Properties
+[2024-11-14 16:32:18] [INFO] Configuration loaded is Properties
+[2024-11-14 16:34:29] [INFO] Configuration loaded is Properties
+[2024-11-14 16:36:50] [INFO] Configuration loaded is Properties
+[2024-11-14 16:43:24] [INFO] Configuration loaded is Properties
