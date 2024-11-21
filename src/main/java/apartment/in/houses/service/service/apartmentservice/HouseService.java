@@ -1,11 +1,11 @@
 package apartment.in.houses.service.service.apartmentservice;
 
 import apartment.in.houses.data_access.apartmentsdatabase.repositories.HouseRepository;
-import apartment.in.houses.service.exceprion.NotFoundException;
-import apartment.in.houses.service.exceprion.InvalidException;
+import apartment.in.houses.service.exception.NotFoundException;
+import apartment.in.houses.service.exception.InvalidException;
 import apartment.in.houses.data_access.apartmentsdatabase.entitie.House;
-import apartment.in.houses.util.DI.annotation.Autowired;
-import apartment.in.houses.util.DI.annotation.Component;
+import apartment.in.houses.framework.spring.DI.annotation.Autowired;
+import apartment.in.houses.framework.spring.DI.annotation.Component;
 
 import java.util.List;
 

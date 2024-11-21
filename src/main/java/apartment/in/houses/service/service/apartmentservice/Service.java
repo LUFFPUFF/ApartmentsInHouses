@@ -1,7 +1,7 @@
 package apartment.in.houses.service.service.apartmentservice;
 
-import apartment.in.houses.service.exceprion.InvalidException;
-import apartment.in.houses.service.exceprion.NotFoundException;
+import apartment.in.houses.service.exception.InvalidException;
+import apartment.in.houses.service.exception.NotFoundException;
 
 import java.util.List;
 

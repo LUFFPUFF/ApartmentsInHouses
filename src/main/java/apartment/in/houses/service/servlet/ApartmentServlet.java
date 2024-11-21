@@ -2,7 +2,7 @@ package apartment.in.houses.service.servlet;
 
 import apartment.in.houses.data_access.apartmentsdatabase.entitie.Apartment;
 import apartment.in.houses.service.service.apartmentservice.ApartmentService;
-import apartment.in.houses.util.DI.context.ApplicationContext;
+import apartment.in.houses.framework.spring.DI.context.ApplicationContext;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

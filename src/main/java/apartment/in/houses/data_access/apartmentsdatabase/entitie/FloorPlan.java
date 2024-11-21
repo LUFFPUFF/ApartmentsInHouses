@@ -1,12 +1,28 @@
 package apartment.in.houses.data_access.apartmentsdatabase.entitie;
 
+import apartment.in.houses.framework.spring.DI.annotation.Component;
+import apartment.in.houses.framework.spring.orm.annotation.*;
+
 import java.io.Serializable;
 
+@Component
+@Entity
+@Table(name = "FloorPlans")
 public class FloorPlan implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GeneratedValue.GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+
+    @ManyToOne(targetEntity = House.class, optional = false)
+    @Column(name = "house_id")
     private House house;
+
+    @Column(name = "floor_number")
     private int floorNumber;
+
+    @Column(name = "image_path")
     private String imagePath;
 
     public FloorPlan(int id, House houseId, int floorNumber, String imagePath) {

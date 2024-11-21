@@ -1,6 +1,5 @@
 package apartment.in.houses.util.logger;
 
-import apartment.in.houses.util.DI.context.ApplicationContext;
 import apartment.in.houses.util.logger.loghandler.ConsoleLogHandler;
 import apartment.in.houses.util.logger.loghandler.FileLogHandler;
 

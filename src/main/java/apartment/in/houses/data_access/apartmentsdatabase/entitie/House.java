@@ -1,7 +1,7 @@
 package apartment.in.houses.data_access.apartmentsdatabase.entitie;
 
-import apartment.in.houses.util.DI.annotation.Component;
-import apartment.in.houses.util.orm.annotation.*;
+import apartment.in.houses.framework.spring.DI.annotation.Component;
+import apartment.in.houses.framework.spring.orm.annotation.*;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -16,9 +16,9 @@ public class House implements Serializable {
     @GeneratedValue(strategy = GeneratedValue.GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(targetEntity = Admin.class, optional = false)
-    @Column(name = "admin_id")
-    private Admin admin;
+//    @ManyToOne(targetEntity = Admin.class, optional = false)
+//    @Column(name = "admin_id")
+//    private Admin admin;
     @Column(name = "address")
     private String address;
 
@@ -32,6 +32,9 @@ public class House implements Serializable {
 
     @Column(name = "commissioning_date")
     private Date commissioning_date;
+
+//    @Column(name = "image_path")
+//    private String imagePath;
 
     public int getId() {
         return id;

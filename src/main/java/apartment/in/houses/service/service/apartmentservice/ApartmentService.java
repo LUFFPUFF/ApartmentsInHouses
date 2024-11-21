@@ -1,11 +1,12 @@
 package apartment.in.houses.service.service.apartmentservice;
 
-import apartment.in.houses.service.exceprion.InvalidException;
-import apartment.in.houses.service.exceprion.NotFoundException;
+import apartment.in.houses.data_access.apartmentsdatabase.entitie.Permission;
+import apartment.in.houses.service.exception.InvalidException;
+import apartment.in.houses.service.exception.NotFoundException;
 import apartment.in.houses.data_access.apartmentsdatabase.repositories.ApartmentRepository;
 import apartment.in.houses.data_access.apartmentsdatabase.entitie.Apartment;
-import apartment.in.houses.util.DI.annotation.Autowired;
-import apartment.in.houses.util.DI.annotation.Component;
+import apartment.in.houses.framework.spring.DI.annotation.Autowired;
+import apartment.in.houses.framework.spring.DI.annotation.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,13 +15,6 @@ import java.util.stream.Collectors;
 public class ApartmentService implements Service<Apartment, Integer> {
     @Autowired
     private ApartmentRepository repository;
-
-    public ApartmentService() {
-    }
-
-    public ApartmentService(ApartmentRepository repository) {
-        this.repository = repository;
-    }
 
     @Override
     public List<Apartment> getAll() {

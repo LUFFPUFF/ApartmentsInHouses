@@ -1,7 +1,7 @@
 package apartment.in.houses.data_access.apartmentsdatabase.entitie;
 
-import apartment.in.houses.util.DI.annotation.Component;
-import apartment.in.houses.util.orm.annotation.*;
+import apartment.in.houses.framework.spring.DI.annotation.Component;
+import apartment.in.houses.framework.spring.orm.annotation.*;
 
 import java.io.Serializable;
 
@@ -36,6 +36,8 @@ public class Apartment implements Serializable {
     private double price;
     @Column(name = "sale_condition")
     private String saleCondition;
+//    @Column(name = "image_path")
+//    private String imagePath;
 
     public Apartment(int id, House house, double totalArea, double livingArea, int rooms, int floor, int entrance, double price, String saleCondition) {
         this.id = id;

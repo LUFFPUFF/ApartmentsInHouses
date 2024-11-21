@@ -1,7 +1,7 @@
 package apartment.in.houses.data_access.apartmentsdatabase.entitie;
 
-import apartment.in.houses.util.DI.annotation.Component;
-import apartment.in.houses.util.orm.annotation.*;
+import apartment.in.houses.framework.spring.DI.annotation.Component;
+import apartment.in.houses.framework.spring.orm.annotation.*;
 
 import java.io.Serializable;
 

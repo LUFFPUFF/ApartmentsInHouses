@@ -1,6 +1,6 @@
 package apartment.in.houses.util.logger;
 
-import apartment.in.houses.util.DI.annotation.Component;
+import apartment.in.houses.framework.spring.DI.annotation.Component;
 import apartment.in.houses.util.logger.loghandler.LogHandler;
 import apartment.in.houses.util.logger.util.FormatString;
 import java.util.List;

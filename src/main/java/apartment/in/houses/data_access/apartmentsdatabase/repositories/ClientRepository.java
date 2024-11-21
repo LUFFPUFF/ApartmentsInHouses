@@ -2,14 +2,14 @@ package apartment.in.houses.data_access.apartmentsdatabase.repositories;
 
 import apartment.in.houses.data_access.apartmentsdatabase.dao.ClientDAO;
 import apartment.in.houses.data_access.apartmentsdatabase.entitie.Client;
-import apartment.in.houses.util.orm.manager.querymanager.criteriabuilder.CriteriaBuilder;
-import apartment.in.houses.util.orm.manager.querymanager.criteriabuilder.CriteriaBuilderImpl;
-import apartment.in.houses.util.orm.manager.querymanager.criteriaquery.CriteriaQuery;
-import apartment.in.houses.util.orm.manager.querymanager.root.Root;
-import apartment.in.houses.util.orm.session.connection.ConnectionManagerImpl;
-import apartment.in.houses.util.orm.session.interf.Session;
-import apartment.in.houses.util.orm.session.interf.SessionFactory;
-import apartment.in.houses.util.orm.transaction.interf.Transaction;
+import apartment.in.houses.framework.spring.orm.manager.querymanager.criteriabuilder.CriteriaBuilder;
+import apartment.in.houses.framework.spring.orm.manager.querymanager.criteriabuilder.CriteriaBuilderImpl;
+import apartment.in.houses.framework.spring.orm.manager.querymanager.criteriaquery.CriteriaQuery;
+import apartment.in.houses.framework.spring.orm.manager.querymanager.root.Root;
+import apartment.in.houses.framework.spring.orm.session.connection.ConnectionManagerImpl;
+import apartment.in.houses.framework.spring.orm.session.interf.Session;
+import apartment.in.houses.framework.spring.orm.session.interf.SessionFactory;
+import apartment.in.houses.framework.spring.orm.transaction.interf.Transaction;
 
 import java.sql.SQLException;
 import java.util.List;
